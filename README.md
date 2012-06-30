@@ -56,8 +56,10 @@ You're a decisive person. You don't need a computer choosing
 things for you! But that doesn't mean you can't be informed
 before making your decision.
 
+```JavaScript
 >>> loo.minesweeper(stalls)
 [0, 1, 0, 1, 2]
+```
 
 These are the distances away from the nearest occupied stall
 for each stall, all in O(2n) time complexity.
