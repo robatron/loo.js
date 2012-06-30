@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-latest.js">
+        </script>
+        
+        <link rel="stylesheet" 
+                href="http://code.jquery.com/qunit/git/qunit.css" 
+                type="text/css" media="screen" />
+        <script type="text/javascript" 
+                src="http://code.jquery.com/qunit/git/qunit.js">
+        </script>
+        <script type="text/javascript" src="loo.js">
+        </script>
+
+        <script>
+            $(document).ready(function(){
+                
+                module('loo.max_occupants');
+                
+                test("<=0 stalls", function(){
+                    equal(
+                        loo.max_occupants(0), 0, 
+                        "No stalls, zero occupants"
+                    );
+                    equal(
+                        loo.max_occupants(-1), 0,
+                        "Negative number of stalls, zero occupants"
+                    );
+                });
+
+                test("1 through 5 stalls", function(){
+                    equal(
+                        loo.max_occupants(1), 1, 
+                        "One stall, maximum one occupant"
+                    );
+                    equal(
+                        loo.max_occupants(2), 1, 
+                        "Two stalls, maximum one occupant"
+                    );
+                    equal(
+                        loo.max_occupants(3), 2,
+                        "Three stalls, two maximum occupants"
+                    );
+                    equal(
+                        loo.max_occupants(4), 2,
+                        "Four stalls, two maximum occupants"
+                    );
+                    equal(
+                        loo.max_occupants(5), 3,
+                        "Five stalls, three maximum occupants"
+                    );
+                });
+                
+                test("50 stalls", function(){
+                    equal(
+                        loo.max_occupants(5), 3,
+                        "50 stalls, 34 maximum occupants"
+                    );
+                });
+                
+                test("8 billion stalls (for every person on earth)", 
+                        function(){
+                    equal(
+                        loo.max_occupants(8000000000), 7991611392,
+                        "Eight billion stalls, ~7.9 billion occupants"
+                    );
+                });
+                
+                
+                module('loo.minesweeper');
+                
+                test("0 stalls", function(){
+                    deepEqual(loo.minesweeper([]), [], 
+                        "No stalls, no minesweeper map"
+                    );
+                });
+                
+                test("1 stall", function(){
+                    deepEqual(loo.minesweeper([true]), [0], 
+                        "One occupied stall"
+                    );
+                    deepEqual(loo.minesweeper([false]), [undefined], 
+                        "One vacant stall"
+                    );
+                });
+                
+                test("3 stalls", function(){
+                    deepEqual(loo.minesweeper([false, false, false]),
+                        [undefined, undefined, undefined],
+                        "Three vacant stalls"
+                    );
+                    deepEqual(loo.minesweeper([false, true, false]),
+                        [1, 0, 1],
+                        "vacant, occupied, vacant"
+                    );
+                    deepEqual(loo.minesweeper([true, false, true]),
+                        [0, 1, 0],
+                        "occupied, vacant, occupied"
+                    );
+                    deepEqual(loo.minesweeper([true, false, false]),
+                        [0, 1, 2],
+                        "occupied, vacant, vacant"
+                    );
+                });
+                
+                test("5 stalls", function(){
+                    deepEqual(
+                        loo.minesweeper(
+                            [true, false, true, false, true]
+                        ), 
+                        [0, 1, 0, 1, 0],
+                        "occupied, vacant, occupied, vacant, occupied"
+                    );
+                    deepEqual(
+                        loo.minesweeper(
+                            [true, false, false, false, true]
+                        ),
+                        [0, 1, 2, 1, 0],
+                        "occupied, vacant, vacant, vacant, occupied"
+                    );
+                    deepEqual(
+                        loo.minesweeper(
+                            [false, false, true, false, false]
+                        ),
+                        [2, 1, 0, 1, 2],
+                        "vacant, vacant, occupied, vacant, vacant"
+                    );
+                    deepEqual(
+                        loo.minesweeper(
+                            [false, false, false, true, false]
+                        ),
+                        [3, 2, 1, 0, 1],
+                        "vacant, vacant, vacant, occupied, vacant"
+                    );
+                });
+                
+                module('loo.choose');
+                
+                test("0 stalls", function(){
+                    deepEqual(loo.choose([]), [], 
+                        "No stalls, no acceptable choice"
+                    );
+                });
+                
+                test("1 stall", function(){
+                    deepEqual(loo.choose([false]), [0], 
+                        "One empty stall, one obvious choice"
+                    );
+                    deepEqual(loo.choose([true]), [], 
+                        "One occuplied stall, no obvious choice"
+                    );
+                });
+                
+                test("3 stalls", function(){
+                    deepEqual(loo.choose([false, false, false]),
+                        [0, 1, 2], 
+                        "Three open stalls, three equal choices"
+                    );
+                    deepEqual(loo.choose([true, false, false]), [2], 
+                        "Two open stalls, one obvious choice"
+                    );
+                    deepEqual(loo.choose([false, true, false]), [0, 2], 
+                        "Two open stalls, two choices"
+                    );
+                    deepEqual(loo.choose([true, true, true]), [], 
+                        "Three occupied stalls, no choices"
+                    );
+                });
+
+            });
+        </script>
+    </head>
+    
+    <body>
+        <h1 id="qunit-header">
+            loo.js unit tests
+        </h1>
+        
+        <h2 id="qunit-banner">
+        </h2>
+        
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        
+        <h2 id="qunit-userAgent">
+        </h2>
+        
+        <ol id="qunit-tests">
+        </ol>
+        
+        <div id="qunit-fixture">
+        </div>
+    </body>
+</html>
