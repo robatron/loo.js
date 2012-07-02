@@ -93,6 +93,11 @@ var loo = {
         return optimal_stalls;
     },
     
+    is_talking_allowed: function(){
+        /* A function that determins if talking is currently allowed in the loo. */
+        return false;
+    },
+    
     minesweeper: function(stalls){
         /* Given an array representing stalls and their occupants, 
         determine the distance of each vacant stall from their
