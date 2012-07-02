@@ -16,15 +16,15 @@ Features
 Examples
 --------
 
-Let's say you have five contiguous stalls with the 0th, and 2nd
+Let's say you have five contiguous stalls with the 0th, and 4th
 stalls occupied. You can represent these stalls with an array of
 Booleans, `true` for occupied, and `false` for vacant.
 
 ```JavaScript
-var stalls = var stalls = [true, false, true, false, false]
+var stalls = [true, false, false, false, true, false, false]
 ```
 
-### Calculate theoretical maximum (non-awkward) occupants
+### Calculate theoretical maximum occupants (non-awkward)
 
 Use `loo.max_occupants` to calculate the theoretical maximum
 number of people that can use this set of stalls without things
@@ -43,12 +43,12 @@ Which stalls are most socially-acceptable to use?
 
 ```JavaScript
 >>> loo.choose(stalls)
-[4]
+[2, 6]
 ```
 
-Clearly, the most socially-acceptable stall to use is the 4th
-(or last) stall, as it is the greatest distance away from any
-occupied stall.
+The most socially-acceptable stalls to use are the 2nd and
+6th stall (0-indexed), as they are the greatest distance away
+from any occupied stall.
 
 ### Create a Minesweeper-like distance map
 
@@ -58,8 +58,8 @@ before making your decision.
 
 ```JavaScript
 >>> loo.minesweeper(stalls)
-[0, 1, 0, 1, 2]
+[0, 1, 2, 1, 0, 1, 2]
 ```
 
-These are the distances away from the nearest occupied stall
+These are the distances away from the nearest occupied stall,
 for each stall, all in O(2n) time complexity.
