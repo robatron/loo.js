@@ -1,6 +1,6 @@
 loo.js
 ======
-The Restroom Protocol Library
+A restroom protocol library.
 
 Features
 --------
