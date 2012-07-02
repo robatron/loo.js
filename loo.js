@@ -38,12 +38,12 @@ var loo = {
         // > 2 stalls
         } else {
             return  1 + Math.pow(
-                        2, Math.round(loo.log2(n - 2) - 1)
+                        2, Math.floor(loo.log2(n - 2) - 1)
                     ) +
                     Math.max(
                         0, 
                         n - 3 / 2 * Math.pow(
-                            2, Math.round(loo.log2(n - 2))
+                            2, Math.floor(loo.log2(n - 2))
                         ) - 1
                     );
         }
