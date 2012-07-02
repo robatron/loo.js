@@ -94,7 +94,7 @@ var loo = {
     },
     
     is_talking_allowed: function(){
-        /* A function that determins if talking is currently allowed in the loo. */
+        /* A function that determines if talking is currently allowed in the loo. */
         return false;
     },
     
