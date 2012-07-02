@@ -8,7 +8,7 @@
 var loo = {
     log2: function(n){
         return Math.log(n) / Math.log(2);
-    }
+    },
     max_occupants: function(n){
         /* Return the maximum number of occupants a given number of 
         contiguous stalls can have without it getting kinda awkward,
