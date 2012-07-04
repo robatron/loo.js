@@ -168,6 +168,14 @@
                         "Three occupied stalls, no choices"
                     );
                 });
+                
+                module('loo.is_talking_allowed');
+                
+                test("Is talking allowed?", function(){
+                    deepEqual(loo.is_talking_allowed(), false, 
+                        "No, talking is not allowed."
+                    );
+                });
 
             });
         </script>
